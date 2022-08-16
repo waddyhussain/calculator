@@ -2,7 +2,6 @@
 // updateDisplay
 // showAnswer
 // clear
-// delete
 
 // ---------- Logic  ---------------
 
@@ -25,7 +24,6 @@
 // if user selects operator: chain computation
 
 // clear: reset all variables
-// delete: remove final char from current operand
 
 function add(a, b) {
     return +a + +b;
@@ -71,6 +69,11 @@ function typeChar(char) {
     updateDisplay();
 }
 
+function deleteChar() {
+    const [operandReference, operandValue] = getCurrentOperand();
+    operands[operandReference] = operandValue.slice(0, -1);
+}
+
 function changeSign() {
     const [operandReference, operandValue] = getCurrentOperand();
     if (!operandValue) return;
@@ -83,6 +86,7 @@ function changeSign() {
 }
 
 function setOperator(operatorFunction) {
+    if (getCurrentOperand()[1] === "-") return;
     if (!operands[1]) {
         operands[0] = Number(operands[0] || ans);
     } else {
