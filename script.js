@@ -1,17 +1,3 @@
-// functions
-// updateDisplay
-
-// ---------- Logic  ---------------
-
-// what to display:
-// main section: 
-// display current operand if not empty
-// if operand empty and current operand is operand1, display ans if ans exists
-// else display 0
-// top section:
-// display topText variable
-// if topText empty and ans exists, display ans
-
 function add(a, b) {
     return +a + +b;
 }
@@ -59,6 +45,7 @@ function typeChar(char) {
 function deleteChar() {
     const [operandReference, operandValue] = getCurrentOperand();
     operands[operandReference] = operandValue.slice(0, -1);
+    updateDisplay()
 }
 
 function changeSign() {
@@ -89,7 +76,12 @@ function showAnswer() {
         return;
     }
     ans = operator(...operands);
-    // ***** TODO: MANUALLY SET DISPLAY TO SHOW ANSWER *****
+    topText = "";
+    
+    const main = document.querySelector(".main-text");
+    const top = document.querySelector(".top-text");
+    main.textContent = ans;
+    top.textContent = `${operands[0]} ${operator} ${operands[1]} =`;
 }
 
 function clear() {
@@ -102,7 +94,14 @@ function clear() {
 }
 
 function updateDisplay() {
-
+    const main = document.querySelector(".main-text");
+    const top = document.querySelector(".top-text");
+    main.textContent = getCurrentOperand()[1] || "0";
+    if (topText || ans === null) {
+        top.textContent = topText;
+    } else {
+        top.textContent = `Ans: ${ans}`;
+    }
 }
 
 const operatorSymbols = new Map();
