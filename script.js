@@ -1,6 +1,5 @@
 // functions
 // updateDisplay
-// changeSign
 // showAnswer
 // clear
 // delete
@@ -44,13 +43,14 @@ function divide(a, b) {
     return +a / +b;
 }
 
-function getCurrentOperandReference() {
-    return operator === null ? 0 : 1;
+function getCurrentOperand() {
+    const reference = operator === null ? 0 : 1;
+    const value = operands[reference];
+    return [reference, value];
 }
 
 function typeChar(char) {
-    const operandReference = getCurrentOperandReference();
-    const operandValue = operands[operandReference];
+    const [operandReference, operandValue] = getCurrentOperand();
     switch (char) {
         case "0":
             if (operandValue) {
@@ -67,6 +67,17 @@ function typeChar(char) {
             break;
         default:
             operands[operandReference] += char;
+    }
+    updateDisplay();
+}
+
+function changeSign() {
+    const [operandReference, operandValue] = getCurrentOperand();
+    if (!operandValue) return;
+    if (operandValue.charAt(0) === "-") {
+        operands[operandReference] = operandValue.slice(1);
+    } else {
+        operands[operandReference] = "-" + operandValue;
     }
     updateDisplay();
 }
