@@ -1,18 +1,10 @@
-// functions add, subtract, multiply, divide
+// functions
 // setOperator
 // updateDisplay
-// enterNumber
 // changeSign
 // updateAnswer
 
 // ---------- Logic  ---------------
-
-// press number: concat to end of operand string
-// if number == 0 and operand str is empty, do nothing
-// if operator is empty, concat operand1, else operand2
-// can only contain decimal once
-// handle making numbers negative?
-// update display (if operand empty, display 0)
 
 // what to display:
 // main section: 
@@ -66,3 +58,39 @@ function multiply(a, b) {
 function divide(a, b) {
     return +a / +b;
 }
+
+function getCurrentOperandReference() {
+    return operator === null ? 0 : 1;
+}
+
+function typeChar(char) {
+    const operandReference = getCurrentOperandReference();
+    const operandValue = operands[operandReference];
+    switch (char) {
+        case "0":
+            if (operandValue) {
+                operands[operandReference] += char;
+            }
+            break;
+        case ".":
+            if (!operandValue) {
+                operands[operandReference] += "0";
+            }
+            if (!operandValue.includes(".")) {
+                operands[operandReference] += char;
+            }
+            break;
+        default:
+            operands[operandReference] += char;
+    }
+    updateDisplay();
+}
+
+function updateDisplay() {
+
+}
+
+const operands = ["", ""];
+let operator = null;
+let ans = null;
+let topText = "";
