@@ -1,8 +1,9 @@
 // functions
-// setOperator
 // updateDisplay
 // changeSign
-// updateAnswer
+// showAnswer
+// clear
+// delete
 
 // ---------- Logic  ---------------
 
@@ -14,22 +15,6 @@
 // top section:
 // display topText variable
 // if topText empty and ans exists, display ans
-
-// press operator (not equals):
-
-// if operand2 empty
-//     convert operand1 to number if necessary 
-//         try use operand1
-//         if operand1 empty and ans exists, set operand1 to answer
-//         else use 0
-//     set operator
-//     update topText
-// else
-//     convert operand2 to number if necessary (if empty set to 0)
-//     operand1 = calculate(operand1, operand2, operator)
-//     set new operator
-//     update topText
-// endif
 
 // press equals:
 // does nothing if operand1 is still being entered
@@ -86,9 +71,26 @@ function typeChar(char) {
     updateDisplay();
 }
 
+function setOperator(operatorFunction) {
+    if (!operands[1]) {
+        operands[0] = Number(operands[0] || ans);
+    } else {
+        operands[0] = operator(...operands);
+    }
+    operator = operatorFunction;
+    topText = `${operands[0]} ${operatorSymbols.get(operator)}`;
+    updateDisplay();
+}
+
 function updateDisplay() {
 
 }
+
+const operatorSymbols = new Map();
+operatorSymbols.set(add, "+");
+operatorSymbols.set(subtract, "-");
+operatorSymbols.set(multiply, "×");
+operatorSymbols.set(divide, "÷");
 
 const operands = ["", ""];
 let operator = null;
