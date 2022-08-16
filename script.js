@@ -76,12 +76,16 @@ function showAnswer() {
         return;
     }
     ans = operator(...operands);
-    topText = "";
     
     const main = document.querySelector(".main-text");
     const top = document.querySelector(".top-text");
     main.textContent = ans;
-    top.textContent = `${operands[0]} ${operator} ${operands[1]} =`;
+    top.textContent = `${operands[0]} ${operatorSymbols.get(operator)} ${+operands[1]} =`;
+
+    topText = "";
+    operands[0] = "";
+    operands[1] = "";
+    operator = null;
 }
 
 function clear() {
