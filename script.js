@@ -1,6 +1,5 @@
 // functions
 // updateDisplay
-// showAnswer
 // clear
 
 // ---------- Logic  ---------------
@@ -13,15 +12,6 @@
 // top section:
 // display topText variable
 // if topText empty and ans exists, display ans
-
-// press equals:
-// does nothing if operand1 is still being entered
-// convert op2 to number
-// op1 = calc(op1, op2, oper)
-// update top text
-// display answer (op1) 
-// if user types numbers: clear current entry (op1)
-// if user selects operator: chain computation
 
 // clear: reset all variables
 
@@ -95,6 +85,14 @@ function setOperator(operatorFunction) {
     operator = operatorFunction;
     topText = `${operands[0]} ${operatorSymbols.get(operator)}`;
     updateDisplay();
+}
+
+function showAnswer() {
+    if (operator === null || operands[1] === "-") {
+        return;
+    }
+    ans = operator(...operands);
+    // ***** TODO: MANUALLY SET DISPLAY TO SHOW ANSWER *****
 }
 
 function updateDisplay() {
