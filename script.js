@@ -118,3 +118,19 @@ const operands = ["", ""];
 let operator = null;
 let ans = null;
 let topText = "";
+
+Array.from(document.querySelectorAll("button[data-value]")).forEach(button => {
+    const char = button.attributes["data-value"].value;
+    button.addEventListener("click", () => typeChar(char));
+});
+
+
+Array.from(document.querySelectorAll(".operator")).forEach(button => {
+    const operatorFunction = window[button.attributes["data-operation"].value];
+    button.addEventListener("click", () => setOperator(operatorFunction));
+});
+
+document.querySelector(".clear").addEventListener("click", clear);
+document.querySelector(".delete").addEventListener("click", deleteChar);
+document.querySelector(".equals").addEventListener("click", showAnswer);
+document.querySelector(".change-sign").addEventListener("click", changeSign);
