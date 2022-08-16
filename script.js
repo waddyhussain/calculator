@@ -1,6 +1,5 @@
 // functions
 // updateDisplay
-// clear
 
 // ---------- Logic  ---------------
 
@@ -12,8 +11,6 @@
 // top section:
 // display topText variable
 // if topText empty and ans exists, display ans
-
-// clear: reset all variables
 
 function add(a, b) {
     return +a + +b;
@@ -93,6 +90,15 @@ function showAnswer() {
     }
     ans = operator(...operands);
     // ***** TODO: MANUALLY SET DISPLAY TO SHOW ANSWER *****
+}
+
+function clear() {
+    operands[0] = "";
+    operands[1] = "";
+    operator = null;
+    ans = null;
+    topText = "";
+    updateDisplay();
 }
 
 function updateDisplay() {
