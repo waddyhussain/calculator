@@ -65,6 +65,7 @@ function setOperator(operatorFunction) {
         operands[0] = Number(operands[0] || ans);
     } else {
         operands[0] = operator(...operands);
+        operands[1] = "";
     }
     operator = operatorFunction;
     topText = `${operands[0]} ${operatorSymbols.get(operator)}`;
