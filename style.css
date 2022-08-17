@@ -31,6 +31,7 @@ body {
 
 .main-text {
     font-size: 45px;
+    overflow-wrap: break-word;
 }
 
 .top-text {

@@ -124,7 +124,6 @@ Array.from(document.querySelectorAll("button[data-value]")).forEach(button => {
     button.addEventListener("click", () => typeChar(char));
 });
 
-
 Array.from(document.querySelectorAll(".operator")).forEach(button => {
     const operatorFunction = window[button.attributes["data-operation"].value];
     button.addEventListener("click", () => setOperator(operatorFunction));
@@ -134,3 +133,27 @@ document.querySelector(".clear").addEventListener("click", clear);
 document.querySelector(".delete").addEventListener("click", deleteChar);
 document.querySelector(".equals").addEventListener("click", showAnswer);
 document.querySelector(".change-sign").addEventListener("click", changeSign);
+
+const keyMappings = {
+    "+": () => setOperator(add),
+    "-": () => setOperator(subtract),
+    "*": () => setOperator(multiply),
+    "/": () => setOperator(divide),
+    "=": showAnswer,
+    "Enter": showAnswer,
+    "Backspace": deleteChar,
+    "Escape": clear
+}
+
+window.addEventListener("keydown", (e) => {
+    if (["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."].includes(e.key)) {
+        typeChar(e.key);
+    } else if (e.key in keyMappings) {
+        keyMappings[e.key]();
+    }
+});
+
+// Prevent enter key from activating last clicked button
+Array.from(document.querySelectorAll("button")).forEach(button => {
+    button.addEventListener("click", e => e.target.blur());
+});
